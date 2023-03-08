@@ -9,7 +9,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 html{
@@ -96,10 +96,10 @@ body{
 
     &__field{
         display: grid;
-        grid-template-columns: repeat(7, 103px);
-        row-gap: 30px;
+        grid-template-columns: repeat(7, 125px);
+        row-gap: 21px;
         -moz-column-gap: 60px;
-        column-gap: 19px;
+        column-gap: 0px;
         height: 85%;
         margin: 10px 0 0 0;
     }
@@ -114,10 +114,18 @@ body{
     }
 }
 
-.cel{
+.tile{
     border: 1px solid black;
     border-radius: 50%;
     height: 80px;
     width: 80px;
     justify-self: center;
+}
+
+.red-piece{ 
+    background-color: var(--player-color-1);
+}
+
+.yellow-piece{
+    background-color: var(--player-color-2);
 }
