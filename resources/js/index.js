@@ -32,6 +32,7 @@ function setGame() {
             tile.classList.add('tile')
             tile.addEventListener('click', setPiece)
             document.querySelector('.board__field').appendChild(tile)
+
         }
         board.push(row)
     }
@@ -47,7 +48,6 @@ function setPiece() {
 
     r = currColumns[c]
     if (r < 0 ) return
-
 
     board[r][c] = currentPlayer
     let tile = document.getElementById(r.toString() + '-' + c.toString())
@@ -118,13 +118,51 @@ function checkWinner() {
 
 function setWinner(r, c) {
     let winner = document.querySelector('board__timer')
+
     if (board[r][c] == playerRed) {
         redPlayerScore++
-        console.log('red')
+        let scoreElement1 = document.querySelector('.player__score--1')
+        scoreElement1.innerHTML = redPlayerScore
+        currentPlayer = playerYellow
     }else {
         yellowPlayerScore++
-        console.log('yellow')
-
+        let scoreElement2 = document.querySelector('.player__score--2')
+        scoreElement2.innerHTML = yellowPlayerScore
+        currentPlayer = playerRed
     }
-    gameOver = true 
+    
+    currColumns = []
+    currColumns = [5, 5, 5, 5, 5, 5, 5]
+    board = []
+    for (let r = 0; r < rows; r++) {
+        let row = []
+        for (let c = 0; c < columns; c++) {
+            row.push(' ')
+        }
+        board.push(row)
+    }
+
+    clearBoard()
+}
+
+function clearBoard() {
+    const tiles = document.querySelectorAll('.tile')
+    tiles.forEach(tile => {
+        if (tile.classList.contains('red-piece')) {
+            tile.classList.remove('red-piece')
+        } else if (tile.classList.contains('yellow-piece')) {
+            tile.classList.remove('yellow-piece')
+        }
+    })
+    currColumns = []
+    currColumns = [5, 5, 5, 5, 5, 5, 5]
+    board = []
+    for (let r = 0; r < rows; r++) {
+        let row = []
+        for (let c = 0; c < columns; c++) {
+            row.push(' ')
+        }
+        board.push(row)
+    }
+
 }

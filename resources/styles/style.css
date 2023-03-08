@@ -108,11 +108,12 @@ body {
 }
 
 .tile {
-  border: 1px solid black;
+  border: 1px solid #000000;
   border-radius: 50%;
   height: 80px;
   width: 80px;
   justify-self: center;
+  background-color: #000000;
 }
 
 .red-piece {
