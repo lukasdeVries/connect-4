@@ -15,19 +15,20 @@
             <button class="top__button">Restart</button>
         </div><!--top-->
         <div class="center">
-            <div class="player">
-                <img src="./resources/images/score-player-1.png" alt="">
+            <div class="player player--1">
                 <p class="player__name">player 1</p>
                 <p class="player__score player__score--1">0</p>
             </div><!--player-->
+            <div class="board__shadow"></div>
             <div class="board">
+                
                 <div class="board__field"></div>
-                <div class="board__timer">
-                    <img src="./resources/images/timer-board-player-1.png" alt="">
+                <div class="board__timer board__timer--red">
+                    <p class="timer-player-status">player <span id="player-number">1</span>'s turn</p>
+                    <p class="time"><span id="time">30</span>s</p>
                 </div>
             </div><!--board-->
-            <div class="player">
-                <img src="./resources/images/score-player-2.png" alt="">
+            <div class="player player--2">
                 <p class="player__name">player 2</p>
                 <p class="player__score player__score--2">0</p>
             </div><!--player-->

@@ -14,8 +14,20 @@ let columns = 7
 
 let currColumns = []
 
+let remainingSecondsStart = 10
+let remainingSeconds = remainingSecondsStart
+
+let interval = null
+
 document.addEventListener('DOMContentLoaded', () => {
     setGame()
+    startTimer(remainingSecondsStart)
+    // const cels = document.querySelectorAll('.tile')
+    // cels.forEach(cel => {
+    //     let celFace = document.createElement('div')
+    //     celFace.classList.add('tile__face')
+    //     cel.appendChild(celFace)
+    // })
 })
 
 function setGame() {
@@ -61,7 +73,8 @@ function setPiece() {
 
     r -= 1
     currColumns[c] = r
-
+    updateTimerColor()
+    remainingSeconds =remainingSecondsStart
     checkWinner()
 }
 
@@ -117,7 +130,8 @@ function checkWinner() {
 }
 
 function setWinner(r, c) {
-    let winner = document.querySelector('board__timer')
+
+    winnerAnimation(board[r][c])
 
     if (board[r][c] == playerRed) {
         redPlayerScore++
@@ -130,19 +144,22 @@ function setWinner(r, c) {
         scoreElement2.innerHTML = yellowPlayerScore
         currentPlayer = playerRed
     }
-    
-    currColumns = []
-    currColumns = [5, 5, 5, 5, 5, 5, 5]
-    board = []
-    for (let r = 0; r < rows; r++) {
-        let row = []
-        for (let c = 0; c < columns; c++) {
-            row.push(' ')
-        }
-        board.push(row)
-    }
 
-    clearBoard()
+    // currColumns = []
+    // currColumns = [5, 5, 5, 5, 5, 5, 5]
+    // board = []
+    // for (let r = 0; r < rows; r++) {
+    //     let row = []
+    //     for (let c = 0; c < columns; c++) {
+    //         row.push(' ')
+    //     }
+    //     board.push(row)
+    // }
+
+    setTimeout(function () {clearBoard() }, 1000)
+    
+
+    
 }
 
 function clearBoard() {
@@ -166,3 +183,100 @@ function clearBoard() {
     }
 
 }
+
+function startTimer(currenSeconds) {
+    remainingSeconds = currenSeconds
+    interval = setInterval(() => {
+        remainingSeconds--
+        updateTimerElement(remainingSeconds)
+        if (remainingSeconds === 0) {
+            if (currentPlayer == 'R') {
+                if (redPlayerScore == 0) {
+                    currentPlayer = playerYellow
+                    updateTimerColor()
+                    remainingSeconds = remainingSecondsStart
+                    return
+                } else {
+                    redPlayerScore--
+                    updatePlayerScoreDisplay(redPlayerScore)
+                    currentPlayer = playerYellow
+                    updateTimerColor()
+                    clearBoard()
+                }
+            }
+            else if (currentPlayer == 'Y'){
+                if (yellowPlayerScore == 0) {
+                    currentPlayer = playerRed
+                    updateTimerColor()
+                    remainingSeconds = remainingSecondsStart
+                    return
+                } else {
+                    yellowPlayerScore--
+                    updatePlayerScoreDisplay(yellowPlayerScore)
+                    currentPlayer = playerRed
+                    updateTimerColor()
+                    clearBoard()
+                }
+            }
+            remainingSeconds = remainingSecondsStart
+            updateTimerElement(remainingSeconds)
+        }
+    }, 1000)
+}
+
+function updateTimerElement(value) {
+    document.querySelector('#time').innerHTML = value
+}
+
+function updateTimerColor() {
+    let element = document.querySelector('.board__timer')
+    if (element.classList.contains('board__timer--red')) {
+        element.classList.remove('board__timer--red')
+        element.classList.add('board__timer--yellow')
+    } else {
+        element.classList.remove('board__timer--yellow')
+        element.classList.add('board__timer--red')
+    }
+}
+
+function updatePlayerScoreDisplay(score) {
+    if (currentPlayer == 'R') {
+        document.querySelector('.player__score--1').innerHTML = score
+    } else if (currentPlayer == 'Y') {
+        document.querySelector('.player__score--2').innerHTML = score
+
+    }
+
+}
+
+function winnerAnimation(winner) {
+
+    const element = document.querySelector('.board')
+
+    let animationTime = 5
+
+    let className 
+    if (winner == 'R') {
+        className = 'board__winner--1'
+    } else {
+        className = 'board__winner--2'
+    }
+
+    let animationInterval = setInterval(() => {
+
+        
+        if (animationTime % 2 == 0) {
+            element.classList.add(className)
+        } else {
+            element.classList.remove(className)
+        }
+        animationTime--
+        //element.classList.remove(className)
+        if (animationTime == 0){
+            clearInterval(animationInterval)
+            clearBoard()
+        }
+    }, 500)    
+}
+
+ 
