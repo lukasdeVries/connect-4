@@ -19,6 +19,8 @@ let remainingSeconds = remainingSecondsStart
 
 let interval = null
 
+let animationInterval = null
+
 document.addEventListener('DOMContentLoaded', () => {
     setGame()
     startTimer(remainingSecondsStart)
@@ -52,6 +54,7 @@ function setGame() {
 
 function setPiece() {
     if (gameOver) return
+    if (animationInterval !== null ) return
 
     let coords = this.id.split('-')
 
@@ -239,6 +242,15 @@ function updateTimerColor() {
     }
 }
 
+function updateTimerCaption() {
+    const element = document.querySelector('.player-number')
+    if (currentPlayer == 'R') {
+        element.innerHTML = '1'
+    } else {
+        element.innerHTML = '2'
+    }
+}
+
 function updatePlayerScoreDisplay(score) {
     if (currentPlayer == 'R') {
         document.querySelector('.player__score--1').innerHTML = score
@@ -262,7 +274,7 @@ function winnerAnimation(winner) {
         className = 'board__winner--2'
     }
 
-    let animationInterval = setInterval(() => {
+    animationInterval = setInterval(() => {
 
         
         if (animationTime % 2 == 0) {
@@ -274,6 +286,7 @@ function winnerAnimation(winner) {
         //element.classList.remove(className)
         if (animationTime == 0){
             clearInterval(animationInterval)
+            animationInterval = null
             clearBoard()
         }
     }, 500)    
