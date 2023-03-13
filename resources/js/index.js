@@ -53,7 +53,7 @@ function setGame() {
 }
 
 /**
- * collects data from clicked tile and stets it to red or yellow depending on cuurent player 
+ * collects data from clicked tile and stets it to red or yellow depending on current player 
  * @returns 
  */
 function setPiece() {

@@ -190,6 +190,18 @@ body {
     padding: 0 50px 0 0;
   }
 }
+@media (max-width: 1910px) {
+  .player__name--1 {
+    margin: 0 20px 0 0;
+    padding: 0 0 0 50px;
+  }
+}
+@media (max-width: 1910px) {
+  .player__name--2 {
+    margin: 0 0 0 20px;
+    padding: 0 50px 0 0;
+  }
+}
 .player__score {
   font-size: 90px;
   line-height: 0.8;
