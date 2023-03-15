@@ -24,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setGame()
     startTimer(remainingSecondsStart)
 
-    document.querySelector('.top__button--restart').addEventListener('click', () => {
-        restart()
-    })
+    if (document.querySelector('.top__button--restart')) {
+        
+        const restartEl = document.querySelector('.top__button--restart')
+        restartEl.addEventListener('click', () => {
+            restart()
+        })
+        
+    }
+
 })
 
 /**
@@ -80,7 +86,7 @@ function setPiece() {
     r -= 1
     currColumns[c] = r
     updateTimerColor()
-    remainingSeconds =remainingSecondsStart
+    remainingSeconds = remainingSecondsStart
     checkWinner()
 }
 
